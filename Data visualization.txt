@@ -1,0 +1,26 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("/content/data1.csv")
+
+plt.figure(figsize=(10, 6))
+sns.barplot(x="Product", y="Sales", data=df, palette="viridis")
+plt.title("Total Sales Per Product")
+plt.xlabel("Product")
+plt.ylabel("Sales")
+plt.show()
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x="Ad Budget ($1000s)", y="Sales", hue="Product", data=df, palette="deep", s=100)
+plt.title("Ad Budget vs Sales by Product")
+plt.xlabel("Ad Budget ($1000s)")
+plt.ylabel("Sales")
+plt.show()
+
+plt.figure(figsize=(10, 6))
+sns.boxplot(x="Product", y="Profit", data=df, palette="coolwarm")
+plt.title("Profit Distribution Per Product")
+plt.xlabel("Product")
+plt.ylabel("Profit")
+plt.show()

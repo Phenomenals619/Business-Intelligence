@@ -1,0 +1,44 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("/content/data1.csv")
+
+print("\n First 5 Rows of the Dataset:")
+print(df.head())
+
+print("\n Dataset Summary:")
+print(df.describe())
+
+print("\n  Missing Values in Dataset:")
+print(df.isnull().sum())
+
+best_selling_product = df.groupby("Product")["Sales"].sum().idxmax()
+print(f"\n Best Selling Product: {best_selling_product}")
+
+avg_profit = df.groupby("Product")["Profit"].mean()
+print("\n Average Profit Per Product:")
+print(avg_profit)
+
+correlation = df["Ad Budget ($1000s)"].corr(df["Sales"])
+print(f"\n Correlation between Ad Budget and Sales: {correlation:.2f}")
+
+plt.figure(figsize=(8, 5))
+sns.barplot(x="Product", y="Sales", data=df, palette="viridis")
+plt.title("Total Sales Per Product")
+plt.xlabel("Product")
+plt.ylabel("Total Sales")
+plt.show()
+
+plt.figure(figsize=(8, 5))
+sns.scatterplot(x=df["Ad Budget ($1000s)"], y=df["Sales"], color="blue")
+plt.title("Ad Budget vs Sales")
+plt.xlabel("Ad Budget ($1000s)")
+plt.ylabel("Sales ($1000s)")
+plt.show()
+
+plt.figure(figsize=(8, 5))
+sns.boxplot(x="Product", y="Profit", data=df, palette="coolwarm")
+plt.title("Profit Distribution Per Product")
+plt.show()
